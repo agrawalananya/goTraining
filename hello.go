@@ -37,7 +37,6 @@ func main() {
 	fmt.Println(s)
 	structs := []Vertex{{2.3, 3.4}, {3.4, 34}}
 	fmt.Println(structs)
-	var m map[string]Vertex
 
 	a := make(map[string]Vertex)
 	a["key"] = Vertex{2.3, 4.5}
