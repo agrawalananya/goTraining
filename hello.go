@@ -1,45 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
 
-type Vertex struct {
-	Lat, Long float64
+	"github.com/gorilla/mux"
+)
+
+type movie struct {
+	name   string
+	actors []string
 }
 
 func main() {
-	m := map[string]Vertex{"shiv": {1.9, 2.9}, "hii": {1.4, 2.9}}
-	if m == nil {
-		fmt.Println(nil)
-	}
-	array := [8]Vertex{{2.9, 3.8}, {4.8, 5}}
-	fmt.Println(array)
-	pt := &array
-	fmt.Println(pt[0])
-	for i, _ := range m {
-		fmt.Println(i)
-	}
-	var name string
-	var alphabet_count int
+	fmt.Println("hei")
+	greeter()
+	r := mux.NewRouter()
+	r.HandleFunc("/", serveHome).Methods("GET")
 
-	fmt.Scanln(&name)
-	fmt.Scanln(&alphabet_count)
+	http.ListenAndServe(":4000", r)
+}
 
-	// Printing the given texts
-	fmt.Printf("%s %d",
-		name, alphabet_count)
+func greeter() {
+	fmt.Println("greete")
+}
 
-	var arr []int
-	fmt.Println(arr)
-	var s [5]int
-	for i := 0; i < 5; i++ {
-		s[i] = 2
-	}
-	fmt.Println(s)
-	structs := []Vertex{{2.3, 3.4}, {3.4, 34}}
-	fmt.Println(structs)
-
-	a := make(map[string]Vertex)
-	a["key"] = Vertex{2.3, 4.5}
-	fmt.Println(m)
-
+func serveHome(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("<h1>Welcome to golang on Yt</h1>"))
 }
